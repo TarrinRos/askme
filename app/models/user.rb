@@ -2,11 +2,14 @@ require 'openssl'
 class User < ApplicationRecord
   ITERATION = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
+  EMAIL_VALID = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   has_many :questions
 
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
+  validates :email, presence: true, uniqueness: true,
+            format: { with: EMAIL_VALID }
+  validates :username, presence: true, uniqueness: true,
+            length: { maximum: 40 }
 
   attr_accessor :password
   validates_presence_of :password, on: :create
@@ -40,3 +43,4 @@ class User < ApplicationRecord
     end
   end
 end
+
