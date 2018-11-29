@@ -1,15 +1,19 @@
 require 'openssl'
 class User < ApplicationRecord
+  before_save { username.downcase! }
+
   ITERATION = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  VALID_USERNAME = /\A[a-z0-9A-Z_]+\z/i
+  VALID_USERNAME = /\A[a-z A-Z 0-9 _]+\z/i
 
   has_many :questions
 
   validates :email, presence: true, uniqueness: true,
             format: { with: VALID_EMAIL }
-  validates :username, presence: true, uniqueness: true,
+
+  # Проверяет валидность username
+  validates :username, presence: true, uniqueness: { case_sensitive: false },
             length: { maximum: 40 }, format: { with: VALID_USERNAME }
 
   attr_accessor :password
