@@ -1,11 +1,11 @@
 require 'openssl'
 class User < ApplicationRecord
-  before_save { username.downcase! }
+  before_validation { username.downcase! }
 
   ITERATION = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
-  VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  VALID_USERNAME = /\A[a-z A-Z 0-9 _]+\z/i
+  VALID_EMAIL = /.+@.+\..+/i
+  VALID_USERNAME = /\A[a-zA-Z0-9_]+\z/i
 
   has_many :questions
 
@@ -13,7 +13,7 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL }
 
   # Проверяет валидность username
-  validates :username, presence: true, uniqueness: { case_sensitive: false },
+  validates :username, presence: true, uniqueness: true,
             length: { maximum: 40 }, format: { with: VALID_USERNAME }
 
   attr_accessor :password
