@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_110603) do
+ActiveRecord::Schema.define(version: 2018_12_01_212722) do
 
   create_table "questions", force: :cascade do |t|
     t.string "text"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_110603) do
     t.string "password_hash"
     t.string "password_salt"
     t.string "avatar_url"
+    t.index ["username"], name: "index_users_on_username"
   end
 
 end
