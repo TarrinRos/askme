@@ -6,7 +6,7 @@ class UsersController < ApplicationController
         name: 'Alex',
         username: 'alexatar',
         avatar_url: 'https://ru.gravatar.com/userimage/21555925/f87b9376098bcb73b7c4a7f1819c802e.png'
-    ),
+      ),
       User.new(
         id: 2,
         name: 'Vasya',
@@ -29,7 +29,10 @@ class UsersController < ApplicationController
 
     @questions = [
       Question.new(text: 'Hello, how do you do?', created_at: Date.parse('01.12.2018')),
-      Question.new(text: 'What?', created_at: Date.parse('02.12.2018'))
+      Question.new(text: 'What?', created_at: Date.parse('02.12.2018')),
+      Question.new(text: 'Do you want something?', created_at: Date.parse('02.12.2018')),
+      Question.new(text: 'What is a sense of life?', created_at: Date.parse('02.12.2018')),
+      Question.new(text: 'ummm?', created_at: Date.parse('02.12.2018'))
     ]
 
     @new_question = Question.new
