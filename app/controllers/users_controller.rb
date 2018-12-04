@@ -1,40 +1,57 @@
 class UsersController < ApplicationController
+  before_action :load_user, except: [:index, :new, :create]
+
+  before_action :autorize_user, except: [:index, :new, :create, :show]
+
   def index
-    @users = [
-      User.new(
-        id: 1,
-        name: 'Alex',
-        username: 'alexatar',
-        avatar_url: 'https://ru.gravatar.com/userimage/21555925/f87b9376098bcb73b7c4a7f1819c802e.png'
-      ),
-      User.new(
-        id: 2,
-        name: 'Vasya',
-        username: 'vasilli')
-    ]
+    @users = User.all
   end
 
   def new
+    redirect_to root_url, alert: 'Вы уже вошли' if current_user.present?
+
+    @user = User.new
   end
 
-  def edit
+  def create
+    redirect_to root_url, alert: 'Вы уже вошли' if current_user.present?
+
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
+    else
+      render 'new'
+    end
+  end
+
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Данные успешно обновленны'
+    else
+      render 'edit'
+    end
   end
 
   def show
-    @user = User.new(
-      name: 'Alex',
-      username: 'alexatar',
-      avatar_url: 'https://ru.gravatar.com/userimage/21555925/f87b9376098bcb73b7c4a7f1819c802e.png'
-    )
+    @questions = @user.questions.order(created_at: :desc)
 
-    @questions = [
-      Question.new(text: 'Hello, how do you do?', created_at: Date.parse('01.12.2018')),
-      Question.new(text: 'What?', created_at: Date.parse('02.12.2018')),
-      Question.new(text: 'Do you want something?', created_at: Date.parse('02.12.2018')),
-      Question.new(text: 'What is a sense of life?', created_at: Date.parse('02.12.2018')),
-      Question.new(text: 'ummm?', created_at: Date.parse('02.12.2018'))
-    ]
+    @new_question = @user.questions.build
+  end
 
-    @new_question = Question.new
+  private
+
+  def autorize_user
+    reject_user unless @user == current_user
+  end
+
+  def load_user
+    @user ||= User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :name, :username, :avatar_url)
   end
 end
