@@ -7,7 +7,7 @@ module ApplicationHelper
     end
   end
 
-  def inclination(questions)
+  def inclination(questions, voprosov, voprosa, vopros)
     questions_amount = questions.count
 
     if questions_amount == nil || !questions_amount.is_a?(Numeric)
@@ -18,11 +18,11 @@ module ApplicationHelper
     remainder_100 = questions_amount % 100
 
     if remainder.between?(5, 9) || remainder_100.between?(11, 14) || remainder == 0
-      "#{questions_amount} вопросов"
+      voprosov
     elsif remainder.between?(2, 4)
-      "#{questions_amount} вопросa"
+      voprosa
     else
-      "#{questions_amount} вопрос"
+      vopros
     end
   end
 end
