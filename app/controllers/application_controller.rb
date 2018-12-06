@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   helper_method :current_user
+  helper_method :destroy_user_questions
 
   private
 
@@ -11,5 +12,10 @@ class ApplicationController < ActionController::Base
 
   def reject_user
     redirect_to root_path, alert: 'Вам сюда запрещено!'
+  end
+
+  def destroy_user_questions(user)
+    questions = Question.where(user_id: user.id)
+    questions.destroy_all
   end
 end
