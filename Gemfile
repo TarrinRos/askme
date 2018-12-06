@@ -8,6 +8,7 @@ gem 'jquery-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
+gem 'rails_12factor'
 gem 'turbolinks'
 gem 'uglifier'
 
