@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
     @user = User.new(user_params)
     if @user.save
+      # Calls method from session helper for login upon signing up
+      log_in(@user)
       redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
     else
       render 'new'
