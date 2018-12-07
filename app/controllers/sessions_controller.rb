@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:email], params[:password])
 
     if user.present?
-      log_in(user)
+      session[:user_id] = user.id
 
       redirect_to root_url, notice: 'Вы успешно вошли'
     else

@@ -18,8 +18,7 @@ class UsersController < ApplicationController
 
     @user = User.new(user_params)
     if @user.save
-      # Calls method from session helper for login upon signing up
-      log_in(@user)
+      session[:user_id] = @user.id
       redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
     else
       render 'new'
@@ -43,7 +42,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    destroy_user_questions(@user)
     @user.destroy
     redirect_to root_path, notice: 'Пользователь удален.'
   end

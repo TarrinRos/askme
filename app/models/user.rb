@@ -7,7 +7,7 @@ class User < ApplicationRecord
   VALID_EMAIL = /\A[^@]+@[^@]+\z/
   VALID_USERNAME = /\A[a-zA-Z0-9_]+\z/i
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true,
             format: { with: VALID_EMAIL }
