@@ -18,7 +18,7 @@
     </div>
 
     <% if !question.author_id.nil? %>
-      <%= link_to "@#{get_author_username(question)}", user_path(question[:author_id]) %>
+      <%= link_to "@#{question.author.username}", user_path(question[:author_id]) %>
     <% else %>
       Anonymous
     <% end %>
