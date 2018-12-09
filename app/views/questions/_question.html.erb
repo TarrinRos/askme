@@ -16,6 +16,10 @@
     <div class="question-date">
       <%= l(question.created_at, format: :short) %>
     </div>
+
+    <%= "@#{User.find(question.user_id).username}" %>
+    <%#= link_to "@#{username_by_user_id_in_questions(@question)}", user_path(@user) %>
+
   </div>
 
   <% if question.user == current_user %>
