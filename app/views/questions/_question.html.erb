@@ -17,9 +17,11 @@
       <%= l(question.created_at, format: :short) %>
     </div>
 
-    <%= "@#{User.find(question.user_id).username}" %>
-    <%#= link_to "@#{username_by_user_id_in_questions(@question)}", user_path(@user) %>
-
+    <% if !question.author_id.nil? %>
+      <%= link_to "@#{get_author_username(question)}", user_path(question[:author_id]) %>
+    <% else %>
+      Anonymous
+    <% end %>
   </div>
 
   <% if question.user == current_user %>

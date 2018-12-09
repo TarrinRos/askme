@@ -29,4 +29,8 @@ module QuestionsHelper
       vopros
     end
   end
+
+  def get_author_username(question)
+    User.find(question.author_id).username
+  end
 end
