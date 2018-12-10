@@ -21,18 +21,22 @@
 </div>
 
 <div class="user-details">
+  <% questions_amount = @questions.count %>
+  <% answered = @questions.where.not(answer: nil).count %>
+  <% unanswered = questions_amount - answered %>
+
   <div class="user-statistics container text-center">
     <div class="column-1-3">
-      <h1 class="title-small"><%= questions_count(@questions) %></h1>
-      <p><%= inclination(questions_count(@questions), "вопросов", "вопроса", "вопрос") %></p>
+      <h1 class="title-small"><%= questions_amount %></h1>
+      <p><%= inclination(questions_amount, "вопросов", "вопроса", "вопрос") %></p>
     </div>
     <div class="column-1-3">
-      <h1 class="title-small"><%= answered_count(@questions) %></h1>
-      <p><%= inclination(answered_count(@questions), "отвеченных", "отвеченных", "отвеченный") %></p>
+      <h1 class="title-small"><%= answered %></h1>
+      <p><%= inclination(answered, "отвеченных", "отвеченных", "отвеченный") %></p>
     </div>
     <div class="column-1-3">
-      <h1 class="title-small"><%= unanswered_count %></h1>
-      <p><%= inclination(unanswered_count, "безответных", "безответных", "безответный") %></p>
+      <h1 class="title-small"><%= unanswered %></h1>
+      <p><%= inclination(unanswered, "безответных", "безответных", "безответный") %></p>
     </div>
   </div>
 </div>

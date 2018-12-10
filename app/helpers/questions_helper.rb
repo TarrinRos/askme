@@ -1,16 +1,4 @@
 module QuestionsHelper
-  def questions_count(questions)
-    @questions_count = questions.count
-  end
-
-  def answered_count(questions)
-    @answered_count = questions.where.not(answer: nil).count
-  end
-
-  def unanswered_count
-    @questions_count - @answered_count
-  end
-
   def inclination(questions, voprosov, voprosa, vopros)
     amount = questions
 
