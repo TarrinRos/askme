@@ -2,7 +2,7 @@
 
 
 <div class="question">
-  <div class="question-content">
+  <div class="question-content">que
     <div class="question-text text-lead">
       <%= question.text %>
     </div>
@@ -18,7 +18,13 @@
     </div>
 
     <% if !question.author_id.nil? %>
-      <%= link_to "@#{question.author.username}", user_path(question[:author_id]) %>
+      <% if question.author.nil? %>
+        <div class="text-red-it">
+          Пользователь удален
+        </div>
+      <% else %>
+        <%= link_to "@#{question.author.username}", user_path(question[:author_id]) %>
+      <% end %>
     <% else %>
       Anonymous
     <% end %>

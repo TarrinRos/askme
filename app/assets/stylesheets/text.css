@@ -43,3 +43,8 @@ a {
 .text-center {
   text-align: center;
 }
+
+.text-red-it {
+  color: #920200;
+  font-style: italic;
+}
