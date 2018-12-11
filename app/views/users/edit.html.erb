@@ -42,6 +42,11 @@
         <%= f.password_field :password_confirmation, class: 'form-text-field' %>
       </div>
 
+      <div class="form-field">
+        <%= f.label 'Цвет фона профиля', class: 'form-label' %>
+        <%= f.color_field :bg_color %>
+      </div>
+
       <div class="form-action buffer-top">
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
         <%= link_to 'Удалить', user_path(@user), method: :delete, data: {confirm: 'Точно удалить пользователя?'} %>
