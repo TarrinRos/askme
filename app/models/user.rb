@@ -16,6 +16,9 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true,
             length: { maximum: 40 }, format: { with: VALID_USERNAME }
 
+  # Проверяет валидность формата цвета 16-ричной системе
+  validates :bg_color, hex_color: true
+
   attr_accessor :password
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
