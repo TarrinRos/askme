@@ -4,19 +4,17 @@ class User < ApplicationRecord
 
   ITERATION = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
-  VALID_EMAIL = /\A[^@]+@[^@]+\z/
-  VALID_USERNAME = /\A[a-zA-Z0-9_]+\z/i
 
   has_many :questions, dependent: :destroy
   has_many :own_questions, class_name: 'Question',
            foreign_key: 'author_id', dependent: :nullify
 
   validates :email, presence: true, uniqueness: true,
-            format: {with: VALID_EMAIL}
+            email: true
 
   # Проверяет валидность username
   validates :username, presence: true, uniqueness: true,
-            length: {maximum: 40}, format: {with: VALID_USERNAME}
+            length: {maximum: 40}, username: true
 
   # Проверяет валидность формата цвета 16-ричной системе
   validates :bg_color, hex_color: true
