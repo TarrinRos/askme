@@ -1,6 +1,6 @@
 require 'openssl'
 class User < ApplicationRecord
-  before_validation { username.downcase! }
+  before_validation { username.downcase! if username }
 
   ITERATION = 20000
   DIGEST = OpenSSL::Digest::SHA256.new

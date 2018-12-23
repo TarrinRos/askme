@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
 gem 'rails_12factor'
+gem 'rails-i18n', '~> 5.1'
 gem 'turbolinks'
 gem 'uglifier'
 
