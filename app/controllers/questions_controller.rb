@@ -12,6 +12,8 @@ class QuestionsController < ApplicationController
 
     @question.author_id = current_user.id if current_user.present?
 
+    @question.add_hashtags
+
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан'
     else

@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_03_102222) do
+ActiveRecord::Schema.define(version: 2019_01_03_143249) do
 
   create_table "hashtags", force: :cascade do |t|
-    t.text "body"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
