@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_174449) do
+ActiveRecord::Schema.define(version: 2019_01_03_102222) do
+
+  create_table "hashtags", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "questions", force: :cascade do |t|
     t.string "text"
@@ -20,6 +26,13 @@ ActiveRecord::Schema.define(version: 2018_12_11_174449) do
     t.integer "user_id"
     t.integer "author_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "questions_hashtags", id: false, force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "hashtag_id"
+    t.index ["hashtag_id"], name: "index_questions_hashtags_on_hashtag_id"
+    t.index ["question_id"], name: "index_questions_hashtags_on_question_id"
   end
 
   create_table "users", force: :cascade do |t|
