@@ -12,4 +12,17 @@
       </div>
     </div>
   <% end %>
+
+  <div class="content-wrapper buffer-both text-center">
+    <div class="col-lg-offset-4 col-lg-4">
+      <div class="buffer-both">
+        <h3>Доступные хештеги</h3>
+      </div>
+      <div>
+        <% @hashtags.each do |hashtag| %>
+          <%= link_to "##{hashtag.name}", hashtag_path(hashtag.name) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
