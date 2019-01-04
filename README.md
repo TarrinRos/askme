@@ -1,24 +1,25 @@
-# README
+# Askme
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Web application for asking and answering varoius questions
 
-Things you may want to cover:
+[Askme](https://mega-curiosity.herokuapp.com/) - heroku deployed example 
 
-* Ruby version
+### Requirements
 
-* System dependencies
+`ruby >= 2.3.0`
 
-* Configuration
+`rails ~> 5.2.0`
 
-* Database creation
+### Installation & using
 
-* Database initialization
+In `terminal` or `cmd`
 
-* How to run the test suite
+- `$ git clone repository_link`
 
-* Services (job queues, cache servers, search engines, etc.)
+- `$ gem install bundler` - if needed
 
-* Deployment instructions
+- `$ bundle install`
 
-* ...
+- `$ rails s` for server starting
+
+Then open `http://localhost:3000` at your web-browser
