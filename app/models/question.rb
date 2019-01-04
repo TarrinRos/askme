@@ -17,18 +17,8 @@ class Question < ApplicationRecord
     # Deletes all hashtags (useful for questions update)
     question.hashtags.clear
 
-    # Scans text of the question by the pattern and returns array of results
-    hashtags_from_text = self.text.scan(/#[[:word:]]+/)
-
-    # Scans answer of the question if not nil
-    if self.answer.nil?
-      hashtags_from_answer = []
-    else
-      hashtags_from_answer = self.answer.scan(/#[[:word:]]+/)
-    end
-
-    # Merges 2 arrays and deletes nil from them
-    hashtags = hashtags_from_text.concat(hashtags_from_answer).compact
+    # Scans text and answer of the question by the pattern and returns array
+    hashtags = ("#{self.text} #{self.answer}").scan(/#[[:word:]]+/)
 
     hashtags.uniq.map do |tag|
       hashtag = Hashtag.find_or_create_by(name: tag.delete("#"))
