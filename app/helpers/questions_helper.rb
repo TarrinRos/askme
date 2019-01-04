@@ -17,4 +17,8 @@ module QuestionsHelper
       vopros
     end
   end
+
+  def render_with_hashtag(text)
+    text.gsub(/#[[:word:]]+/) { |hashtag| link_to hashtag, hashtag_path(hashtag.delete('#'))}.html_safe
+  end
 end
