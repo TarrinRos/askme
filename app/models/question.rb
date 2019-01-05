@@ -7,20 +7,22 @@ class Question < ApplicationRecord
 
   validates :text, :user, presence: true, length: {maximum: 255}
 
-  after_create :add_hashtags
+  after_commit :add_hashtags, on: [:create, :update]
 
-  before_update :add_hashtags
+  Question.transaction do
+    Question.create
+    Hashtag.create
+    Hashtag.before_add_for_questions
+  end
 
   def add_hashtags
-    question = Question.find_by(id: self.id)
-
-    # Deletes all hashtags (useful for questions update)
-    question.hashtags.clear
+    # Deletes all hashtags
+    hashtags.clear
 
     # Scans text and answer of the question by the pattern and returns array
-    hashtags = ("#{self.text} #{self.answer}").scan(/#[[:word:]]+/)
+    hashtags_scaned = ("#{self.text} #{self.answer}").scan(/#[[:word:]]+/)
 
-    hashtags.uniq.map do |tag|
+    hashtags_scaned.uniq.map do |tag|
       hashtag = Hashtag.find_or_create_by(name: tag.delete("#"))
       self.hashtags << hashtag
     end
