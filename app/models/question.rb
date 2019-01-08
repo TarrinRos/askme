@@ -9,11 +9,6 @@ class Question < ApplicationRecord
 
   after_commit :add_hashtags, on: [:create, :update]
 
-  Question.transaction do
-    Question.create
-    Hashtag.create
-    Hashtag.before_add_for_questions
-  end
 
   def add_hashtags
     # Deletes all hashtags
