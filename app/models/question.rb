@@ -9,7 +9,6 @@ class Question < ApplicationRecord
 
   after_commit :add_hashtags, on: [:create, :update]
 
-
   def add_hashtags
     # Deletes all hashtags
     hashtags.clear
