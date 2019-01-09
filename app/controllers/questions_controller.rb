@@ -39,21 +39,17 @@ class QuestionsController < ApplicationController
 
   private
 
-  def authorize_user
-    reject_user unless @question.user == current_user
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def load_question
     @question = Question.find(params[:id])
   end
 
+  def authorize_user
+    reject_user unless @question.user == current_user
+  end
+
   def check_captcha(model)
-    if current_user.present?
-      true
-    else
-      verify_recaptcha(model: model)
-    end
+    current_user.present? || verify_recaptcha(model: model)
   end
 
   # Only allow a trusted parameter "white list" through.
