@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, ActiveAdmin::Devise.config
   root "users#index"
   resources :users
   resource :session, only: [:new, :create, :destroy]
