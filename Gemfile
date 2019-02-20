@@ -6,6 +6,7 @@ ruby '2.5.1'
 
 gem 'activeadmin'
 gem 'awesome_rails_console'
+gem 'draper'
 gem 'devise'
 gem 'jquery-rails'
 gem 'puma', '~> 3.11'
