@@ -29,6 +29,12 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'rspec-rails'
+end
+
 group :production do
   gem 'pg'
 end
